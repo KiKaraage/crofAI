@@ -268,7 +268,7 @@
 	<br>
 	<br>
 	<br>
-	<div class="speed" id="speed">--- t/s</div>
+	<div class="speed" id="speed">TTFT: --- | Speed: --- t/s | Finished: ---</div>
 	<button onclick="handleApiKey()" class="btn" style="width: auto; padding: 8px 16px; margin-top: 5px;">Set API Key</button>
 	<br><br><br><br><br><br><br><br><br>
 	<!-- PAGE STARTS HERE -->
@@ -374,13 +374,15 @@
 	    });
 
 	    const generate = async () => {
-		document.getElementById("speed").innerHTML = "--- t/s";
+		document.getElementById("speed").innerHTML = "TTFT: --- | Speed: --- t/s | Finished: ---";
 		responsebox = document.getElementById("response");
 		responsebox.innerHTML = "";
 		var prompt = document.getElementById("prompt-box").value;
 		console.log(prompt);
 		try {
 		    // Fetch the response from the OpenAI API with the signal from AbortController
+		    let requestStartTime = Date.now();
+		    let ttftCalculated = false;
 		    const response = await fetch("/v2/chat/completions", {
 			method: "POST",
 			headers: {
@@ -424,11 +426,17 @@
 					    model_thinking = false;
 					    responsebox.innerHTML += "<br><br>";
 					}
+					if (!ttftCalculated) {
+					    let ttft = Date.now() - requestStartTime;
+					    ttftCalculated = true;
+					    document.getElementById("speed").innerHTML = `TTFT: ${(ttft / 1000).toFixed(2)} s | Speed: --- t/s | Finished: ---`;
+					}
 					responsebox.innerHTML += escapeHTML(chunk.choices[0].delta.content);
 				    }
 				    if (chunk.usage !== undefined) {
 					console.log("FOUND USAGE:", chunk.usage);
-					document.getElementById("speed").innerHTML = chunk.usage.tokens_per_second + " t/s";
+					let ttftText = ttftCalculated ? document.getElementById("speed").innerHTML.split(" | ")[0] : "TTFT: ---";
+					document.getElementById("speed").innerHTML = `${ttftText} | Speed: ${chunk.usage.tokens_per_second} t/s | Finished: ---`;
 				    }
 				} catch(e) {
 				    console.log("Parse error:", e, "Data:", data);
@@ -439,6 +447,11 @@
 		    let txt = responsebox.innerHTML;
 		    let showdown_conv = String(conv.makeHtml(txt));
 		    responsebox.innerHTML = showdown_conv;
+		    let totalTime = ((Date.now() - requestStartTime) / 1000).toFixed(2);
+		    let currentSpeedText = document.getElementById("speed").innerHTML;
+		    let ttftPart = currentSpeedText.split(" | ")[0];
+		    let speedPart = currentSpeedText.split(" | ")[1];
+		    document.getElementById("speed").innerHTML = `${ttftPart} | ${speedPart} | Finished: ${totalTime} s`;
 
 		} catch (error) {
 		    console.error("ruh roh!:", error);
