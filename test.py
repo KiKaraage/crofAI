@@ -1354,4 +1354,22 @@ def crofuijs():
     return send_file("crofui.js", mimetype="application/javascript")
 
 
+@app.route("/v2/chat/completions", methods=["POST"])
+def chat_completions():
+    import requests
+
+    data = request.get_json()
+    auth_header = request.headers.get("Authorization", "")
+    upstream = requests.post(
+        "https://ai.nahcrof.com/v2/chat/completions",
+        json=data,
+        headers={"Authorization": auth_header},
+        stream=True,
+    )
+    return Response(
+        stream_with_context(upstream.iter_content()),
+        content_type=upstream.headers.get("Content-Type", "application/json"),
+    )
+
+
 app.run(host="0.0.0.0", port=8008)  # haha, nice

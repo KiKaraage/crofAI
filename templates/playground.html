@@ -269,6 +269,7 @@
 	<br>
 	<br>
 	<div class="speed" id="speed">--- t/s</div>
+	<button onclick="handleApiKey()" class="btn" style="width: auto; padding: 8px 16px; margin-top: 5px;">Set API Key</button>
 	<br><br><br><br><br><br><br><br><br>
 	<!-- PAGE STARTS HERE -->
 	<select name="model-select" id="model-select" class="model-select" style="background: var(--background);">
@@ -384,7 +385,7 @@
 			method: "POST",
 			headers: {
 			    "Content-Type": "application/json",
-			    Authorization: `Bearer `,
+			    Authorization: `Bearer ${API_KEY}`,
 			},
 			body: JSON.stringify({
 			    model: ACTIVE_MODEL,
@@ -395,26 +396,28 @@
 		    });
 		    const reader = response.body.getReader();
 		    const decoder = new TextDecoder("utf-8");
+		    let buffer = "";
+		    let model_thinking = false;
 
 		    while (true) {
 			const { done, value } = await reader.read();
 			if (done) {
 			    break;
 			}
-			// Massage and parse the chunk of data
-			let returned = decoder.decode(value);
-			const chunks = returned.split("data: ");
-			let model_thinking = false;
-			chunks.forEach(chunk => {
-			    if (chunk != "[DONE]"){
-				try{
-				    chunk = JSON.parse(chunk);
+			buffer += decoder.decode(value, { stream: true });
+			const lines = buffer.split("\n");
+			buffer = lines.pop();
+			for (const line of lines) {
+			    if (line.startsWith("data: ")) {
+				const data = line.slice(6);
+				if (data === "[DONE]") continue;
+				try {
+				    const chunk = JSON.parse(data);
 				    if (chunk.choices[0].delta.reasoning_content !== undefined) {
 					if (!model_thinking) {
 					    model_thinking = true;
 					}
 					responsebox.innerHTML += escapeHTML(chunk.choices[0].delta.reasoning_content);
-					console.log(chunk.choices[0].delta.reasoning_content);	
 				    }
 				    else if (chunk.choices[0].delta.content !== undefined){
 					if (model_thinking) {
@@ -424,31 +427,14 @@
 					responsebox.innerHTML += escapeHTML(chunk.choices[0].delta.content);
 				    }
 				    if (chunk.usage !== undefined) {
-					console.log(chunk);
-					let usage = chunk.usage;
-					document.getElementById("speed").innerHTML = usage.tokens_per_second + " t/s";
+					console.log("FOUND USAGE:", chunk.usage);
+					document.getElementById("speed").innerHTML = chunk.usage.tokens_per_second + " t/s";
 				    }
-				    
-
-				} catch(error) {
-				    if (chunk.error){
-					if (chunk.error.code === 401){
-					    if (chunk.error.message !== "Not Enough Credits"){
-						console.log("user had no token, generating token...");
-						// generate_token();
-						console.log("token generated, retrying...");
-						// generate();
-					    } else {
-						createToast("Not enough credits for this model");
-					    }
-					} else {
-					    console.log(chunk);
-					    createToast("Error code: " + chunk.error.code);
-					}
-				    }
+				} catch(e) {
+				    console.log("Parse error:", e, "Data:", data);
 				}
 			    }
-			});
+			}
 		    }
 		    let txt = responsebox.innerHTML;
 		    let showdown_conv = String(conv.makeHtml(txt));
@@ -481,6 +467,17 @@
 	    function copy_text(text) {
 		navigator.clipboard.writeText(text);
 		createToast("Copied!");
+	    }
+
+	    let API_KEY = localStorage.getItem("nahcrof_api_key") || "";
+
+	    function handleApiKey() {
+		const newKey = prompt("Enter your API key:", API_KEY);
+		if (newKey !== null) {
+		    API_KEY = newKey;
+		    localStorage.setItem("nahcrof_api_key", newKey);
+		    createToast("API key saved!");
+		}
 	    }
 	</script>
 	
