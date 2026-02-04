@@ -495,37 +495,24 @@ def money_format(value: float) -> str:  # I got lazy
     return f"{round(value, 3):.3f}"
 
 
-def openrouter_models():  # This is just a model list, it's called openrouter_models because I changed the format when I started working with openrouter
+def openrouter_models():
     models_list = {
         "data": [
-            # {
-            #    "speed": 10,
-            #    "id": "crof-tester",
-            #    "name": "CrofAI: Crof Tester",
-            #    "created": number,
-            #    "context_length": 32000,
-            #    "max_completion_tokens": 30000,
-            #    "quantization": "fp2",
-            #    "pricing": {
-            #        "prompt": "0.0000002",
-            #        "completion": "0.00000025",
-            #    }
-            # },
-            # {
-            #  "speed": 70,
-            #  "id": "kimi-k2-thinking",
-            #  "name": "MoonshotAI: Kimi K2 Thinking",
-            #  "created": 1762447430,
-            #  "context_length": 131072,
-            #  "max_completion_tokens": 131072,
-            #  "quantization": "fp4",
-            #  "pricing": {
-            #    "prompt": "0.00000040",
-            #    "completion": "0.00000080",
-            #  }
-            # },
             {
-                "speed": 100,
+                "speed": 77,
+                "id": "kimi-k2.5",
+                "name": "MoonshotAI: Kimi K2.5",
+                "created": number,
+                "context_length": 131072,
+                "max_completion_tokens": 131072,
+                "quantization": "int4",
+                "pricing": {
+                    "prompt": "0.00000045",
+                    "completion": "0.000002",
+                },
+            },
+            {
+                "speed": 40,
                 "id": "kimi-k2-thinking",
                 "name": "MoonshotAI: Kimi K2 Thinking",
                 "created": 1762447430,
@@ -538,7 +525,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 150,
+                "speed": 198,
                 "id": "kimi-k2-thinking-turbo",
                 "name": "MoonshotAI: Kimi K2 Thinking",
                 "created": 1762447430,
@@ -551,7 +538,46 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 50,
+                "speed": 91,
+                "id": "glm-4.7-flash-eco",
+                "name": "Z.AI: GLM 4.7 Flash",
+                "created": number,
+                "context_length": 31488,
+                "max_completion_tokens": 8192,
+                "quantization": "fp8",
+                "pricing": {
+                    "prompt": "0.0",
+                    "completion": "0.0",
+                },
+            },
+            {
+                "speed": 105,
+                "id": "glm-4.7",
+                "name": "Z.AI: GLM 4.7",
+                "created": 1766445494,
+                "context_length": 202752,
+                "max_completion_tokens": 202752,
+                "quantization": "fp4",
+                "pricing": {
+                    "prompt": "0.0000004",
+                    "completion": "0.0000014",
+                },
+            },
+            {
+                "speed": 62,
+                "id": "glm-4.7-canopy",
+                "name": "Z.AI: GLM 4.7",
+                "created": number,
+                "context_length": 202752,
+                "max_completion_tokens": 202752,
+                "quantization": "fp8",
+                "pricing": {
+                    "prompt": "0.0000005",
+                    "completion": "0.0000021",
+                },
+            },
+            {
+                "speed": 96,
                 "id": "deepseek-v3.2",
                 "name": "DeepSeek: DeepSeek V3.2",
                 "created": 1755799640,
@@ -564,7 +590,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 50,
+                "speed": 17,
                 "id": "deepseek-v3.2-chat",
                 "name": "DeepSeek: DeepSeek V3.2",
                 "created": 1755799640,
@@ -578,9 +604,9 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
             },
             {
                 "speed": 50,
-                "id": "deepseek-v3.2-precision",
+                "id": "deepseek-v3.2-canopy",
                 "name": "DeepSeek: DeepSeek V3.2",
-                "created": 1755799640,
+                "created": number,
                 "context_length": 163840,
                 "max_completion_tokens": 163840,
                 "quantization": "fp8",
@@ -590,20 +616,20 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 50,
+                "speed": 41,
                 "id": "deepseek-v3.2-speciale",
                 "name": "DeepSeek: DeepSeek V3.2 Speciale",
                 "created": 1765220964,
                 "context_length": 163840,
                 "max_completion_tokens": 163840,
-                "quantization": "fp8",
+                "quantization": "Q4_0",
                 "pricing": {
                     "prompt": "0.00000035",
                     "completion": "0.00000045",
                 },
             },
             {
-                "speed": 50,
+                "speed": 137,
                 "id": "devstral-2",
                 "name": "Mistral: Devstral 2 2512",
                 "created": 1765688214,
@@ -616,7 +642,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 70,
+                "speed": 131,
                 "id": "kimi-k2-0905",
                 "name": "MoonshotAI: Kimi K2 0905",
                 "created": 1757083316,
@@ -629,7 +655,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 500,
+                "speed": 215,
                 "id": "kimi-k2-0905-turbo",
                 "name": "MoonshotAI: Kimi K2 0905",
                 "created": 1757083316,
@@ -642,46 +668,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 50,
-                "id": "glm-4.7",
-                "name": "Z.AI: GLM 4.7",
-                "created": 1766445494,
-                "context_length": 202752,
-                "max_completion_tokens": 202752,
-                "quantization": "fp4",
-                "pricing": {
-                    "prompt": "0.00000040",
-                    "completion": "0.00000140",
-                },
-            },
-            {
-                "speed": 50,
-                "id": "glm-4.7-precision",
-                "name": "Z.AI: GLM 4.7",
-                "created": 1766957785,
-                "context_length": 202752,
-                "max_completion_tokens": 202752,
-                "quantization": "fp8",
-                "pricing": {
-                    "prompt": "0.00000050",
-                    "completion": "0.00000210",
-                },
-            },
-            {
-                "speed": 100,
-                "id": "glm-4.6-turbo",
-                "name": "Z.AI: GLM 4.6",
-                "created": 1762575030,
-                "context_length": 202752,
-                "max_completion_tokens": 202752,
-                "quantization": "fp8",
-                "pricing": {
-                    "prompt": "0.0000005",
-                    "completion": "0.00000225",
-                },
-            },
-            {
-                "speed": 50,
+                "speed": 3,
                 "id": "minimax-m2.1",
                 "name": "MiniMax: MiniMax M2.1",
                 "created": 1766794658,
@@ -694,10 +681,10 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 50,
-                "id": "minimax-m2.1-precision",
+                "speed": 135,
+                "id": "minimax-m2.1-canopy",
                 "name": "MiniMax: MiniMax M2.1",
-                "created": 1766957785,
+                "created": number,
                 "context_length": 196608,
                 "max_completion_tokens": 196608,
                 "quantization": "fp8",
@@ -707,7 +694,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 50,
+                "speed": 125,
                 "id": "intellect-3",
                 "name": "Prime Intellect: INTELLECT-3",
                 "created": 1764358004,
@@ -720,46 +707,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 20,
-                "id": "kimi-k2-eco",
-                "name": "MoonshotAI: Kimi K2",
-                "created": number,
-                "context_length": 131072,
-                "max_completion_tokens": 131072,
-                "quantization": "Q2_k",
-                "pricing": {
-                    "prompt": "0.00000005",
-                    "completion": "0.0000001",
-                },
-            },
-            {
-                "speed": 30,
-                "id": "glm-4.6",
-                "name": "Z.AI: GLM 4.6",
-                "created": number,
-                "context_length": 131072,
-                "max_completion_tokens": 131072,
-                "quantization": "fp8",
-                "pricing": {
-                    "prompt": "0.0000003",
-                    "completion": "0.0000006",
-                },
-            },
-            {
-                "speed": 30,
-                "id": "glm-4.5",
-                "name": "Z.AI: GLM 4.5",
-                "created": number,
-                "context_length": 131072,
-                "max_completion_tokens": 131072,
-                "quantization": "fp8",
-                "pricing": {
-                    "prompt": "0.0000002",
-                    "completion": "0.0000004",
-                },
-            },
-            {
-                "speed": 30,
+                "speed": 171,
                 "id": "ring-1t",
                 "name": "inclusionAI: Ring-1T",
                 "created": 1757083316,
@@ -772,17 +720,20 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 15,
+                "speed": 104,
                 "id": "deepseek-v3.2-exp",
                 "name": "DeepSeek: DeepSeek V3.2 Exp",
                 "created": 1755799640,
                 "context_length": 131072,
                 "max_completion_tokens": 131072,
                 "quantization": "Q4_0",
-                "pricing": {"prompt": "0.00000015", "completion": "0.0000003"},
+                "pricing": {
+                    "prompt": "0.00000015",
+                    "completion": "0.0000003",
+                },
             },
             {
-                "speed": 18,
+                "speed": 8,
                 "id": "deepseek-v3.1-terminus",
                 "name": "DeepSeek: DeepSeek V3.1 Terminus",
                 "created": 1755799640,
@@ -795,7 +746,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 18,
+                "speed": 373,
                 "id": "deepseek-v3.1-terminus-reasoner",
                 "name": "DeepSeek: DeepSeek V3.1 Terminus",
                 "created": 1755799640,
@@ -808,46 +759,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 18,
-                "id": "deepseek-v3.1",
-                "name": "DeepSeek: DeepSeek V3.1",
-                "created": 1755799640,
-                "context_length": 131072,
-                "max_completion_tokens": 131072,
-                "quantization": "Q4_0",
-                "pricing": {
-                    "prompt": "0.00000015",
-                    "completion": "0.0000005",
-                },
-            },
-            {
-                "speed": 32,
-                "id": "deepseek-v3.1-reasoner",
-                "name": "DeepSeek: DeepSeek V3.1",
-                "created": 1755799640,
-                "context_length": 131072,
-                "max_completion_tokens": 131072,
-                "quantization": "Q4_0",
-                "pricing": {
-                    "prompt": "0.00000015",
-                    "completion": "0.0000005",
-                },
-            },
-            {
-                "speed": 10,
-                "id": "deepseek-v3-0324",
-                "name": "DeepSeek: DeepSeek V3 0324",
-                "created": number,
-                "context_length": 131072,
-                "max_completion_tokens": 8192,
-                "quantization": "Q4_0",
-                "pricing": {
-                    "prompt": "0.0000002",
-                    "completion": "0.00000025",
-                },
-            },
-            {
-                "speed": 500,
+                "speed": 184,
                 "id": "deepseek-v3-0324-turbo",
                 "name": "DeepSeek: DeepSeek V3 0324",
                 "created": number,
@@ -860,7 +772,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 120,
+                "speed": 80,
                 "id": "deepseek-r1-0528",
                 "name": "DeepSeek: R1 0528",
                 "created": number,
@@ -873,7 +785,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 150,
+                "speed": 40,
                 "id": "deepseek-r1-0528-turbo",
                 "name": "DeepSeek: R1 0528",
                 "created": number,
@@ -886,10 +798,10 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 322,
+                "speed": 142,
                 "id": "qwen3-next-80b-a3b-instruct",
                 "name": "Qwen: Qwen3 Next 80B A3B Instruct",
-                "created": 1757651484.888002,  # replace with appropriate number
+                "created": 1757651484.888002,
                 "context_length": 262144,
                 "max_completion_tokens": 262144,
                 "quantization": "Q8_0",
@@ -899,10 +811,10 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 50,
+                "speed": 387,
                 "id": "qwen3-235b-a22b-2507-instruct",
                 "name": "Qwen: Qwen3 235B A22B 2507",
-                "created": 1753149982.621645,  # replace with appropriate number
+                "created": 1753149982.621645,
                 "context_length": 131072,
                 "max_completion_tokens": 131072,
                 "quantization": "Q8_0",
@@ -912,10 +824,10 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 27,
+                "speed": 457,
                 "id": "qwen3-235b-a22b-2507-thinking",
                 "name": "Qwen: Qwen3 235B A22B Thinking 2507",
-                "created": 1753493357.191588,  # replace with appropriate number
+                "created": 1753493357.191588,
                 "context_length": 131072,
                 "max_completion_tokens": 131072,
                 "quantization": "Q8_0",
@@ -925,10 +837,10 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 200,
+                "speed": 374,
                 "id": "qwen3-coder",
                 "name": "Qwen: Qwen3 Coder",
-                "created": 1753219761.509367,  # replace with appropriate number
+                "created": 1753219761.509367,
                 "context_length": 131072,
                 "max_completion_tokens": 131072,
                 "quantization": "fp8",
@@ -938,20 +850,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 250,
-                "id": "qwen3-coder-turbo",
-                "name": "Qwen: Qwen3 Coder",
-                "created": 1753292189.809791,  # replace with appropriate number
-                "context_length": 131072,
-                "max_completion_tokens": 131072,
-                "quantization": "fp8",
-                "pricing": {
-                    "prompt": "0.0000002",
-                    "completion": "0.0000005",
-                },
-            },
-            {
-                "speed": 150,
+                "speed": 372,
                 "id": "gpt-oss-120b",
                 "name": "OpenAI: GPT OSS 120B",
                 "created": "1754447935.370325",
@@ -964,7 +863,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 30,
+                "speed": 256,
                 "id": "gpt-oss-safeguard-120b",
                 "name": "OpenAI: gpt-oss-safeguard-120b",
                 "created": "1754447935.370325",
@@ -977,7 +876,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 80,
+                "speed": 149,
                 "id": "gemma-3-27b-it",
                 "name": "Google: Gemma 3 27B",
                 "created": number,
@@ -990,7 +889,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 65,
+                "speed": 163,
                 "id": "llama-4-scout",
                 "name": "Meta: Llama 4 Scout",
                 "created": number,
@@ -1003,7 +902,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 40,
+                "speed": 279,
                 "id": "llama3.3-70b",
                 "name": "Meta: Llama 3.3 70B Instruct",
                 "created": number,
@@ -1016,33 +915,7 @@ def openrouter_models():  # This is just a model list, it's called openrouter_mo
                 },
             },
             {
-                "speed": 50,
-                "id": "deepseek-r1-distill-llama-70b",
-                "name": "DeepSeek: R1 Distill Llama 70B",
-                "created": number,
-                "context_length": 65536,
-                "max_completion_tokens": 65536,
-                "quantization": "fp8",
-                "pricing": {
-                    "prompt": "0.0000001",
-                    "completion": "0.0000001",
-                },
-            },
-            {
-                "speed": 50,
-                "id": "deepseek-r1-distill-qwen-32b",
-                "name": "DeepSeek: R1 Distill Qwen 32B",
-                "created": number,
-                "context_length": 65536,
-                "max_completion_tokens": 65536,
-                "quantization": "fp8",
-                "pricing": {
-                    "prompt": "0.0000001",
-                    "completion": "0.0000001",
-                },
-            },
-            {
-                "speed": 3500,
+                "speed": 4420,
                 "id": "stok-0.4.1",
                 "name": "CrofAI: Stok 0.4.1",
                 "created": number,
@@ -1133,7 +1006,11 @@ def dashboard():
 
 @app.route("/pricing")
 def pricing():
-    vision_models = ["llama-4-scout"]  # sets which models get the "vision" flag/icon
+    vision_models = [
+        "llama-4-scout",
+        "kimi-k2.5",
+        "gemma-3-27b-it",
+    ]  # sets which models get the "vision" flag/icon
     models = eval(str(data_for_pricing["data"]))  # weird, I know
 
     model_index = -1

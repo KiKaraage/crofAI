@@ -551,7 +551,7 @@
 		<div class="price-box price-header">
 		    <div class="row-left">
 			<div class="model_name">Model</div>
-			<div class="bubbles">
+		    <div class="bubbles">
 			    <span class="bubble">Quantization</span>
 			    <span class="bubble">Context / Max output</span>
 			</div>
@@ -589,6 +589,9 @@
 				>{{ model['context_length'] }} /
 				{{ model['max_completion_tokens'] }}</span
 			    >
+			    {% if model['id'] in vision_models %}
+			    <span class="bubble">vision</span>
+			    {% endif %}
 			</div>
 		    </div>
 		    <div class="col col--in" data-label="$ / M in">
